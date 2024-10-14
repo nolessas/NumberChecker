@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mega Ultra Fancy Number Checker</title>
+    <meta name="description" content="The most mind-blowing number checker on the internet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <div id="vanta-background"></div>
+        <div class="container">
+            <h1>{{ title }}</h1>
+            <div class="input-container">
+                <label for="numberInput">Enter a number (0-99):</label>
+                <input type="number" id="numberInput" v-model="inputNumber" min="0" max="99">
+                <div class="slider-container">
+                    <input type="range" v-model="inputNumber" min="0" max="99" class="slider">
+                </div>
+            </div>
+            <button @click="checkNumber" :disabled="!inputNumber" class="fancy-button">
+                <span class="button-text">Check</span>
+                <span class="button-icon">🚀</span>
+            </button>
+            <transition name="fade">
+                <div v-if="showResult" :class="['result', resultClass]">
+                    {{ resultMessage }}
+                </div>
+            </transition>
+            <div class="number-display">
+                <span v-for="digit in displayNumber" :key="digit" class="digit">{{ digit }}</span>
+            </div>
+            <div v-if="funFact" class="fun-fact">
+                <h3>Fun Fact:</h3>
+                <p>{{ funFact }}</p>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
